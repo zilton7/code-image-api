@@ -38,6 +38,8 @@ app.post("/generate", async (req, res) => {
         background: #1a1b27;
         color: #fff;
         box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        margin-right: 2rem;
+        margin-left: 2rem;
       }
       code {
         white-space: pre-wrap;
