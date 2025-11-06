@@ -11,10 +11,11 @@ app.get("/", (req, res) => {
 
 app.post("/generate", async (req, res) => {
   const { code = "", language = "ruby", theme = "dark" } = req.body;
+  const { width = 1080, height = 540 } = req.query;
 
   const highlighted = hljs.highlight(code, { language }).value;
 
-const html = `
+  const html = `
 <html>
   <head>
     <link rel="stylesheet"
@@ -26,8 +27,8 @@ const html = `
         display: flex;
         align-items: center;
         justify-content: center;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
       }
       pre {
         font-family: 'Fira Code', monospace;
@@ -49,13 +50,15 @@ const html = `
 </html>
 `;
 
-
   try {
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
-    await page.setViewport({ width: 1080, height: 540 });
+    await page.setViewport({
+      width: parseInt(width, 10) || 1080,
+      height: parseInt(height, 10) || 1080,
+    });
     await page.setContent(html, { waitUntil: "networkidle0" });
 
     const image = await page.screenshot({ type: "png" });
@@ -70,4 +73,6 @@ const html = `
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Code Image API running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`🚀 Code Image API running on port ${PORT}`)
+);
