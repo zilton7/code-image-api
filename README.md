@@ -1,7 +1,6 @@
+To run locally
 ```
-mkdir code-image-api && cd code-image-api
-npm init -y
-npm install express puppeteer highlight.js
+npm install
 node server.js
 ```
 
