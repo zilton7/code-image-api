@@ -1,0 +1,17 @@
+{
+  "name": "code-image-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "highlight.js": "^11.11.1",
+    "puppeteer": "^24.29.0"
+  }
+}
